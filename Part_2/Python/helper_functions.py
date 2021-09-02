@@ -5,7 +5,10 @@ implementation, either:
 1) just copy and paste the function into your file
 OR
 2) import the helper functions file using the following, or something similar
-from .. import helper_functions as hf
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+import helper_functions as hf
 """
 #!/usr/bin/env python
 
