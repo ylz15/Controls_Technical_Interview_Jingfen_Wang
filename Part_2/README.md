@@ -14,7 +14,7 @@ You know you can’t prototype solutions for all your questions, but want to see
 
 ## Candidate Action Items:
 
-1. Given the provided datasets, create a basic implementation for 1 of the following functions:
+1. Given the provided datasets and the file of helper functions, create a basic implementation for 1 of the following functions:
 	- predictAnkleTorque
 	- detectWalking
 	- isUserInStance
@@ -52,6 +52,7 @@ You know you can’t prototype solutions for all your questions, but want to see
 	- exampleFunctionNameFunction: provides an example of what the output of your function
 	  implementation may look like
 	- testFunctionNameFunction: provides a way for you to test your function implementation on the files in the dataset folder
+	- helperFunctions: technically this file lives outside of the folder you'll be working in, but it contains a number of functions that may make Task 1 a little easier. Use           them if you so please.
 5. If you create additional code to help you analyze data or otherwise help you implement your function, put them in 1 or more additional files within the function's folder. Don't forget; we are interested in both your solution and your thought process.
 
 -------------------------
