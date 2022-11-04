@@ -11,24 +11,24 @@ import helper_functions as hf
 
 
 def test_predict_ankle_torque():
-	"""Test your code with this function"""
-	files = os.listdir("dataset")
+    """Test your code with this function"""
+    files = os.listdir("dataset")
 
-	i = 0
-	for filename in files:
-		data_array = hf.load_csv_file("dataset/" + filename)
+    i = 0
+    for filename in files:
+        data_array = hf.load_csv_file("dataset/" + filename)
 
-		ankle_torque_predictions = pat.predict_ankle_torque(data_array)
+        ankle_torque_predictions = pat.predict_ankle_torque(data_array)
 
-		mplt.figure(i + 1)
-		mplt.plot(data_array[:, hf.variable_name_to_column_index("ank_torque")], "b")
-		mplt.plot(ankle_torque_predictions, "r")
-		mplt.draw()
+        mplt.figure(i + 1)
+        mplt.plot(data_array[:, hf.variable_name_to_column_index("ank_torque")], "b")
+        mplt.plot(ankle_torque_predictions, "r")
+        mplt.draw()
 
-		i += 1
+        i += 1
 
-	mplt.show()
+    mplt.show()
 
 
 if __name__ == "__main__":
-	test_predict_ankle_torque()
+    test_predict_ankle_torque()

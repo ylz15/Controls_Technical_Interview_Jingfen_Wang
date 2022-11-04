@@ -22,11 +22,11 @@ import helper_functions as hf  # pylint: disable=import-error
 
 
 def is_user_in_stance(data_array):
-	"""
-	This is a placeholder so the code will run. Replace this with your
-	implementation.
-	"""
-	is_user_in_stance_predictions = deepcopy(
-		data_array[:, hf.variable_name_to_column_index("gait_state")]
-	)
-	return is_user_in_stance_predictions
+    """
+    This is a placeholder so the code will run. Replace this with your
+    implementation.
+    """
+    is_user_in_stance_predictions = deepcopy(
+        data_array[:, hf.variable_name_to_column_index("gait_state")]
+    )
+    return is_user_in_stance_predictions

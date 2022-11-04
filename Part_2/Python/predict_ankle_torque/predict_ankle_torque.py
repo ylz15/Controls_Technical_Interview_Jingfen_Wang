@@ -21,11 +21,11 @@ import helper_functions as hf  # pylint: disable=import-error
 
 
 def predict_ankle_torque(data_array):
-	"""
-	This is a placeholder so the code will run. Replace this with your
-	implementation.
-	"""
-	ankle_torque_predictions = deepcopy(
-		data_array[:, hf.variable_name_to_column_index("ank_torque")]
-	)
-	return ankle_torque_predictions
+    """
+    This is a placeholder so the code will run. Replace this with your
+    implementation.
+    """
+    ankle_torque_predictions = deepcopy(
+        data_array[:, hf.variable_name_to_column_index("ank_torque")]
+    )
+    return ankle_torque_predictions

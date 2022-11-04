@@ -25,11 +25,11 @@ import helper_functions as hf  # pylint: disable=import-error
 
 
 def detect_walking(data_array):
-	"""
-	This is a placeholder so the code will run. Replace this with your
-	implementation.
-	"""
-	detect_walking_predictions = deepcopy(
-		data_array[:, hf.variable_name_to_column_index("movement")]
-	)
-	return detect_walking_predictions
+    """
+    This is a placeholder so the code will run. Replace this with your
+    implementation.
+    """
+    detect_walking_predictions = deepcopy(
+        data_array[:, hf.variable_name_to_column_index("movement")]
+    )
+    return detect_walking_predictions

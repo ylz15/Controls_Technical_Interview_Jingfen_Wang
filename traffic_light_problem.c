@@ -59,7 +59,7 @@ void drawUpperVerticalRoad(char * trafficColor, struct lane_of_cars_s northbound
 	{
 		if(i >= 10 - southboundCars.carsWaitingAtIntersection)
 		{
-			southboundCarPlaceholder  = "+";	
+			southboundCarPlaceholder  = "+";
 		}
 		else{southboundCarPlaceholder  = " ";}
 
@@ -71,7 +71,7 @@ void drawUpperVerticalRoad(char * trafficColor, struct lane_of_cars_s northbound
 		{
 			if(northboundCars.carsLeavingIntersection > 0)
 			{
-				printf("          |  %s ! + |          \n",southboundCarPlaceholder);	
+				printf("          |  %s ! + |          \n",southboundCarPlaceholder);
 			}
 			else{printf("          |  %s !   |          \n",southboundCarPlaceholder);}
 		}
@@ -86,7 +86,7 @@ void drawUpperVerticalRoad(char * trafficColor, struct lane_of_cars_s northbound
 	else
 	{
 		printf("__________          __________ \n");
-	}		
+	}
 }
 
 void drawLowerVerticalRoad(char * trafficColor, struct lane_of_cars_s northboundCars, struct lane_of_cars_s southboundCars)
@@ -108,7 +108,7 @@ void drawLowerVerticalRoad(char * trafficColor, struct lane_of_cars_s northbound
 	{
 		if(i < northboundCars.carsWaitingAtIntersection)
 		{
-			northboundCarPlaceholder  = "+";	
+			northboundCarPlaceholder  = "+";
 		}
 		else{northboundCarPlaceholder  = " ";}
 
@@ -120,20 +120,20 @@ void drawLowerVerticalRoad(char * trafficColor, struct lane_of_cars_s northbound
 		{
 			if(southboundCars.carsLeavingIntersection > 0)
 			{
-				printf("          |  + ! %s |          \n",northboundCarPlaceholder);	
+				printf("          |  + ! %s |          \n",northboundCarPlaceholder);
 			}
 			else{printf("          |    ! %s |          \n",northboundCarPlaceholder);}
 		}
 		else{printf("          |    ! %s |          \n",northboundCarPlaceholder);}
 	}
 
-		
+
 }
 
 void drawWestboundLane(char * trafficColor, struct lane_of_cars_s westboundCars)
 {
 	//Show cars moving away from the intersection
-	//Note: Because we don't really care about these cars, I will only display one of them 
+	//Note: Because we don't really care about these cars, I will only display one of them
 	//even if there is more than one car moving away from the intersection
 	if(westboundCars.carsLeavingIntersection > 0)
 	{
@@ -153,13 +153,13 @@ void drawWestboundLane(char * trafficColor, struct lane_of_cars_s westboundCars)
 	{
 		printf("          ");
 	}
-	
+
 	//Show cars waiting at the intersection
 	for(int8_t i = 0; i < 10; i++)
 	{
 		if(i < westboundCars.carsWaitingAtIntersection)
 		{
-			printf("+");	
+			printf("+");
 		}
 		else{printf(" ");}
 	}
@@ -174,7 +174,7 @@ void drawEastboundLane(char * trafficColor, struct lane_of_cars_s eastboundCars)
 	{
 		if(i >= 10 - eastboundCars.carsWaitingAtIntersection)
 		{
-			printf("+");	
+			printf("+");
 		}
 		else{printf(" ");}
 	}
@@ -190,7 +190,7 @@ void drawEastboundLane(char * trafficColor, struct lane_of_cars_s eastboundCars)
 	}
 
 	//Show cars moving away from the intersection
-	//Note: Because we don't really care about these cars, I will only display one of them 
+	//Note: Because we don't really care about these cars, I will only display one of them
 	//even if there is more than one car moving away from the intersection
 	if(eastboundCars.carsLeavingIntersection > 0)
 	{
