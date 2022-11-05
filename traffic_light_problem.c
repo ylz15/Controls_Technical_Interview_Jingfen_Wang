@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdint.h>
 #include <time.h>
+//#include <conio.h>
 
 struct lane_of_cars_s
 {
@@ -16,38 +17,22 @@ struct lane_of_cars_s eastboundCars;
 struct lane_of_cars_s northboundCars;
 struct lane_of_cars_s southboundCars;
 
+void drawIntersection(char * horizantalTrafficColor, char * verticalTrafficColor);
 void drawWestboundLane(char * trafficColor, struct lane_of_cars_s westboundCars);
 void drawEastboundLane(char * trafficColor, struct lane_of_cars_s eastboundCars);
 void drawUpperVerticalRoad(char * trafficColor, struct lane_of_cars_s northboundCars, struct lane_of_cars_s southboundCars);
 void drawLowerVerticalRoad(char * trafficColor, struct lane_of_cars_s northboundCars, struct lane_of_cars_s southboundCars);
+void delay(int16_t ms);
+void advanceLane(char * trafficColor, struct lane_of_cars_s * lane);
 
-void drawIntersection(void)
-{
-	printf("Hello World! \n");
-	printf("          |    !    |          \n");
-	printf("          |    !    |          \n");
-	printf("          |    !    |          \n");
-	printf("          |    !    |          \n");
-	printf("          |    !    |          \n");
-	printf("__________          __________ \n");
-	printf("\n");
-	printf("----------          ---------- \n");
-	printf("\n");
-	printf("__________          __________ \n");
-	printf("          |    !    |          \n");
-	printf("          |    !    |          \n");
-	printf("          |    !    |          \n");
-	printf("          |    !    |          \n");
-	printf("          |    !    |          \n");
-}
 
-void drawRoad(char * street, char * trafficColor, int8_t westBoundCars, int8_t eastBoundCars)
+void drawIntersection(char * horizantalTrafficColor, char * verticalTrafficColor)
 {
-	drawUpperVerticalRoad(trafficColor,northboundCars,southboundCars);
-	drawWestboundLane(trafficColor,westboundCars);
+	drawUpperVerticalRoad(verticalTrafficColor,northboundCars,southboundCars);
+	drawWestboundLane(horizantalTrafficColor,westboundCars);
 	printf("----------          ---------- \n");
-	drawEastboundLane(trafficColor,eastboundCars);
-	drawLowerVerticalRoad(trafficColor,northboundCars,southboundCars);
+	drawEastboundLane(horizantalTrafficColor,eastboundCars);
+	drawLowerVerticalRoad(verticalTrafficColor,northboundCars,southboundCars);
 }
 
 void drawUpperVerticalRoad(char * trafficColor, struct lane_of_cars_s northboundCars, struct lane_of_cars_s southboundCars)
@@ -202,6 +187,38 @@ void drawEastboundLane(char * trafficColor, struct lane_of_cars_s eastboundCars)
 	}
 }
 
+void delay(int16_t ms)
+{
+    //Storing start time
+    clock_t startTime = clock();
+ 
+    //Looping till required time is not achieved
+    while(clock() < startTime + ms);
+}
+
+void advanceLane(char * trafficColor, struct lane_of_cars_s * lane)
+{
+	//Move any cars in the intersection to the leaving side of the intersection
+	if(lane->carsInIntersection > 0)
+	{
+		lane->carsInIntersection--;
+		lane->carsLeavingIntersection++;
+	}
+
+	//Move a waiting car into the intersection if possible
+	if((strcmp(trafficColor, "G") == 0) && (lane->carsWaitingAtIntersection > 0))
+	{
+		lane->carsWaitingAtIntersection--;
+		lane->carsInIntersection++;
+	}
+
+	//Add cars to the lane randomly (but not more than 10 cars can ever be added to the lane ever)
+
+
+	//Keep track of how long cars have cumulatively waited at this part of the intersection
+	//lane->timeWaiting += lane->carsWaitingAtIntersection;
+}
+
 void main(void)
 {
 	memset(&westboundCars, 0, sizeof(struct lane_of_cars_s));
@@ -210,20 +227,37 @@ void main(void)
 	memset(&southboundCars, 0, sizeof(struct lane_of_cars_s));
 
 	westboundCars.carsWaitingAtIntersection = 5;
-	westboundCars.carsInIntersection = 1;
+	westboundCars.carsInIntersection = 0;
 	westboundCars.carsLeavingIntersection = 3;
 
 	eastboundCars.carsWaitingAtIntersection = 2;
-	eastboundCars.carsInIntersection = 1;
+	eastboundCars.carsInIntersection = 0;
 	eastboundCars.carsLeavingIntersection = 7;
 
 	northboundCars.carsWaitingAtIntersection = 9;
-	northboundCars.carsInIntersection = 1;
+	northboundCars.carsInIntersection = 0;
 	northboundCars.carsLeavingIntersection = 2;
 
 	southboundCars.carsWaitingAtIntersection = 4;
-	southboundCars.carsInIntersection = 1;
+	southboundCars.carsInIntersection = 0;
 	southboundCars.carsLeavingIntersection = 1;
 
-	drawRoad("horizantal","R",2,3);
+	for(int8_t i = 0; i < 30; i++)
+	{
+		//Update the traffic lights
+		char * horizantalTrafficColor = "G";
+		char * verticalTrafficColor = "G";
+
+		//Advance the lanes if possible
+		advanceLane(horizantalTrafficColor, &westboundCars);
+		advanceLane(horizantalTrafficColor, &eastboundCars);
+		advanceLane(verticalTrafficColor, &northboundCars);
+		advanceLane(verticalTrafficColor, &southboundCars);
+
+		//Draw the intersection
+		system("clear");
+		drawIntersection(horizantalTrafficColor,verticalTrafficColor);
+		fflush(stdout);
+		delay(1000);
+	}
 }
