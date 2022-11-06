@@ -43,11 +43,17 @@ static int8_t checkForCrashes(void);
 // Functions You (the Interviewee) Should Edit:
 //****************************************************************************
 
+//Returns the color of the traffic light for the eastbound and westbound lanes 
+//of horizantal street given the current status of the intersection
+//Note: The output should be either "R", "Y", or "G"
 char * setHorizantalTrafficLight(struct intersection_s intersection)
 {
 	return "R";
 }
 
+//Returns the color of the traffic light for the northbound and southbound lanes 
+//of vertical street given the current status of the intersection
+//Note: The output should be either "R", "Y", or "G"
 char * setVerticalTrafficLight(struct intersection_s intersection)
 {
 	return "R";
