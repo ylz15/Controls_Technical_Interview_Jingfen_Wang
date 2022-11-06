@@ -53,6 +53,13 @@ char * setVerticalTrafficLight(struct intersection_s intersection)
 	return "R";
 }
 
+
+//****************************************************************************
+//YOU CAN REVIEW THE CODE BELOW BUT DO NOT EDIT IT UNLESS YOU'RE 3000% SURE 
+//THERE'S A BUG IN MY CODE! (which admittedly, is possible)
+//****************************************************************************
+
+
 //****************************************************************************
 // Public function(s):
 //****************************************************************************
