@@ -73,6 +73,9 @@ char * setVerticalTrafficLight(struct intersection_s intersection)
 //Main function to run the traffic simulation
 void main(void)
 {
+	//Seed my random number generator
+	srand(time(0));
+
 	//Initialize the intersection
 	initIntersection();
 
@@ -113,7 +116,8 @@ void main(void)
 
 	//If the animation time's out, let them know their score.
 	int8_t totalCarsThatMadeIt = myIntersection.northboundCars.carsThatHaveLeft + myIntersection.southboundCars.carsThatHaveLeft + myIntersection.westboundCars.carsThatHaveLeft + myIntersection.eastboundCars.carsThatHaveLeft;
-	printf("FAIL: Traffic Jam! You ran out of time. You got %i/40 cars through in 120 seconds.\n", totalCarsThatMadeIt);
+	int16_t totalWaitTime = myIntersection.northboundCars.timeWaiting + myIntersection.southboundCars.timeWaiting + myIntersection.westboundCars.timeWaiting + myIntersection.eastboundCars.timeWaiting;
+	printf("FAIL: Traffic Jam! You ran out of time. You got %i/40 cars through in 120 seconds. The total wait time was: %i seconds.\n", totalCarsThatMadeIt, totalWaitTime);
 }
 
 //****************************************************************************
@@ -122,6 +126,9 @@ void main(void)
 static void initIntersection(void)
 {
 	memset(&myIntersection, 0, sizeof(struct intersection_s));
+
+	myIntersection.horizantalTrafficColor = "R";
+	myIntersection.verticalTrafficColor = "R";
 
 	myIntersection.eastboundCars.popularity = 3;
 	myIntersection.westboundCars.popularity = 5;
