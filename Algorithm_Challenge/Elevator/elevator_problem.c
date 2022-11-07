@@ -122,10 +122,7 @@ void main(void)
 		int8_t numPeopleAtDestination = 0;
 		for(int8_t f = 0; f < BUILDING_HEIGHT; f++)
 		{
-			for(int8_t j = 0; j < 10; j++)
-			{
-				numPeopleAtDestination += myBuilding.floors[f].arrivals;
-			}
+			numPeopleAtDestination += myBuilding.floors[f].arrivals;
 		}
 
 		if(numPeopleAtDestination == 10)
@@ -139,10 +136,7 @@ void main(void)
 	int8_t numPeopleAtDestination = 0;
 	for(int8_t f = 0; f < BUILDING_HEIGHT; f++)
 	{
-		for(int8_t j = 0; j < 10; j++)
-		{
-			numPeopleAtDestination += myBuilding.floors[f].arrivals;
-		}
+		numPeopleAtDestination += myBuilding.floors[f].arrivals;
 	}
 	printf("FAIL: You ran out of time. You got %i/10 people through in 120 seconds.\n", numPeopleAtDestination);
 	
