@@ -46,7 +46,7 @@ static int8_t checkForCrashes(void);
 //Returns the color of the traffic light for the eastbound and westbound lanes 
 //of horizantal street given the current status of the intersection
 //Note: The output should be either "R", "Y", or "G"
-char * setHorizantalTrafficLight(struct intersection_s intersection)
+static char * setHorizantalTrafficLight(struct intersection_s intersection)
 {
 	return "R";
 }
@@ -54,7 +54,7 @@ char * setHorizantalTrafficLight(struct intersection_s intersection)
 //Returns the color of the traffic light for the northbound and southbound lanes 
 //of vertical street given the current status of the intersection
 //Note: The output should be either "R", "Y", or "G"
-char * setVerticalTrafficLight(struct intersection_s intersection)
+static char * setVerticalTrafficLight(struct intersection_s intersection)
 {
 	return "R";
 }
@@ -345,7 +345,7 @@ static void delay(int16_t ms)
 static int8_t checkForCrashes(void)
 {
 	int8_t isHorizantalCarInIntersection = (myIntersection.westboundCars.carsInIntersection | myIntersection.eastboundCars.carsInIntersection);
-	int8_t isVerticalCarInIntersection = (myIntersection.northboundCars.carsInIntersection | myIntersection.northboundCars.carsInIntersection);
+	int8_t isVerticalCarInIntersection = (myIntersection.northboundCars.carsInIntersection | myIntersection.southboundCars.carsInIntersection);
 
 	if(isHorizantalCarInIntersection && isVerticalCarInIntersection){return 1;}
 	return 0;
