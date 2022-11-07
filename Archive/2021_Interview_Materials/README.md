@@ -14,14 +14,8 @@ Once you are ready to submit your solution, create a pull request to _master_.
 (Note: You will not have infinite time to submit your solution, but you should have your deadline
 info in an email from us)
 
-Depending on which part of the process you're in and what you're interviewing for (you should have 
-this info in an email from us), you may be working out of the Algorithm_Challenge folder, 
-Debugging_Challenge folder, or both. Look at the readme files in the applicable folder for more 
-detailed instructions on what to do for each part of the process.
-
-NOTE: 
-If you're running on a Windows machine, you will need to install GCC.
-If you're running on a Linux machine, you will need to install [ASK CARLOS].
-If you're running on a Mac, you will need to install [ASK CARLOS].
+Depending on which part of the process you're in (you should have this info in an email from us),
+you may be working out of the Part_1, Part_2, or Part_3 folders. Look at the readme files in the
+applicable folder for more detailed instructions on what to do for each part of the process.
 
 Good Luck!
