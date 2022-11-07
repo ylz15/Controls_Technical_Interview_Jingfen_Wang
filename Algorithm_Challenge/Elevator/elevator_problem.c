@@ -76,7 +76,7 @@ void main(void)
 	delay(1000);
 
 	//Run the elevator for a set period of time
-	for(int8_t i = 0; i < 120; i++)
+	for(int8_t i = 0; i < 60; i++)
 	{
 		//Choose the next floor to stop at
 		myBuilding.elevator.nextStop = setNextElevatorStop(myBuilding);
@@ -138,8 +138,7 @@ void main(void)
 	{
 		numPeopleAtDestination += myBuilding.floors[f].arrivals;
 	}
-	printf("FAIL: You ran out of time. You got %i/10 people through in 120 seconds.\n", numPeopleAtDestination);
-	
+	printf("FAIL: You ran out of time. You got %i/10 people through in 60 seconds.\n", numPeopleAtDestination);
 }
 
 //****************************************************************************
