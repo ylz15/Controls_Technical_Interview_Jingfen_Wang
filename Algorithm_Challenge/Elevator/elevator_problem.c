@@ -153,8 +153,15 @@ static void initBuilding(void)
 
 	for(int8_t f = 0; f < BUILDING_HEIGHT; f++)
 	{
-		myBuilding.floors[f].departures[0] = rand() % BUILDING_HEIGHT;
-		myBuilding.floors[f].departures[1] = rand() % BUILDING_HEIGHT;
+		for(int8_t j = 0; j < 2; j++)
+		{
+			int destination = rand() % BUILDING_HEIGHT;
+			while(destination == f)
+			{
+				destination = rand() % BUILDING_HEIGHT;
+			}
+			myBuilding.floors[f].departures[j] = destination;
+		}
 		myBuilding.floors[f].arrivals = 0;
 	}
 }
