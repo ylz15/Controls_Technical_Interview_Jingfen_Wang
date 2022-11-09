@@ -28,10 +28,14 @@ https://wiki.dephy.com/wiki/flexsea/doku.php?id=installbuildtoolswindows&s[]=min
 If you're running on a Linux/Ubuntu 22.04 machine, you will need to install gcc by running the following 
 in your command terminal:
 
+```bash
 sudo apt-get install -y git gcc build-essential
+```
 	
 If you're running on a MacOS, you will need to install gcc by running the following in your command terminal:
 
+```
 brew install gcc
+```
 
 Good Luck!
