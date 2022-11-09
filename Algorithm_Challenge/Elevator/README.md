@@ -1,38 +1,38 @@
 # Elevator Problem (1 hour)
 
-There's a busy traffic intersection outside your building. The roads at the intersection are horizantal street and vertical street. 
-You are an engineer with the department of transportation and you're trying to come up with a new traffic light pattern that 
-prevents cars from crashing in the intersection but also minimizes traffic jams. 
+It's lunch time in your building and the elevator's broken. You are an engineer with elevator maintainance department and 
+you're trying fix the elevator and program it to pick up and drop off the people in the building in the most efficient way.  
 
 Your goal:
-- Get all the cars safely through the intersection in less than 2 minutes.
-- Minimize the cumulative time that each car waits at the intersection
+- Get all the people in the building to their destinations in less than 1 minute.
 
 You will additionally be assessed on:
 - The quality of your code
+- The time it takes to for your simulation to finish
 
 A few things to note about the simulation:
-- Cars waiting to go into the intersection can only move into the intersection if the light is green.
-- Cars already in the intersection can move out of the intersection even when the light is red or yellow.
-- A crash will occur if a car on horizantal street and a car on vertical street are in the intersection at the same time.
-- Cars IN the intersection are denoted with an 'X'. Cars on either side of the intersection are denoted with a '+'. 
-  This will make more sense once you try running the program.
-- Only one car from each lane can be IN the intersection at once. For example, if two cars are waiting in the eastbound 
-  lane to cross the intersection, they cannot both move into the intersection at the same time. The first car in the 
-  lane will move into the intersection. Then, the second car will move into the intersection as the first car leaves. 
+- The elevator will start on a random floor
+- The elevator has a max capacity of 3 people
+- The building has 5 floors
+- It takes 1 second for the elevator to move to an adjacent floor (i.e. moving from floor 1 to floor 2 takes 1 second)
+- It takes 3 seconds for the elevator to stop at a floor (i.e. opening the doors, letting people on/off, and closing the 
+  doors takes 3 seconds)
+- If the elevator stops at a floor, everyone who can get off will, and everyone who can get on will. If not everyone who 
+  wants to get on will fit, the person first in line will get preference.
+- The destinations of people waiting on a floor or in the elevator are represented by an array. A value of -1 in those 
+  arrays means there is no one in that spot.
 
 To build the project, type the following in your command terminal:
-gcc traffic_light_problem.c -o traffic_light_problem
+gcc elevator_problem.c -o elevator_problem
 
 To run the project, type the following in your command terminal:
-./traffic_light_problem.exe
+./elevator_problem.exe
 
 Candidate Action Items:
-- Fill in the two unfinshed functions at the beginning of the file: 
-  - char * setHorizantalTrafficLight(struct intersection_s intersection) and 
-  - char * setVerticalTrafficLight(struct intersection_s intersection)
+- Fill in the unfinshed function at the beginning of the file: 
+  - int8_t setNextElevatorStop(struct building_s building) 
   If you need to add additional variables, structures, functions, etc, that's fine. However, with the exception of the 
-  above two functions, please do not edit the code that's already in the files, unless you are extremely certain that 
+  above function, please do not edit the code that's already in the files, unless you are extremely certain that 
   there's a bug in the code.
 - Briefly describe your implementation (1-3 sentences).
   - ADD YOUR ANSWER HERE
