@@ -20,7 +20,11 @@ A few things to note about the simulation:
 - If the elevator stops at a floor, everyone who can get off will, and everyone who can get on will. If not everyone who 
   wants to get on will fit, the person first in line will get preference.
 - The destinations of people waiting on a floor or in the elevator are represented by an array. A value of -1 in those 
-  arrays means there is no one in that spot.
+  arrays means there is no one in that spot. (Note: This should only be true for instances of the 'passengers' and 
+  'departures' arrays)
+- People who get off the elevator and arrive on their destination floor should be visually denoted by an 'x' on the 
+  arrivals side of the simulation. Within the code, the number of people who've arrived on a floor is represented as 
+  an integer variable within the floor_s structure. 
 
 To build the project, type the following in your command terminal:
 gcc elevator_problem.c -o elevator_problem
