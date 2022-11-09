@@ -155,7 +155,6 @@ static int8_t setNextElevatorStop(struct building_s building)
 		if(building.elevator.passengers[i] != -1) 
 		{
 			nextStop = building.elevator.passengers[i];
-			break;
 		}
 	}
 
@@ -168,7 +167,6 @@ static int8_t setNextElevatorStop(struct building_s building)
 				if(building.floors[f].departures[i] != -1)
 				{ 
 					nextStop = f;
-					return nextStop;
 				}
 			}
 		}
