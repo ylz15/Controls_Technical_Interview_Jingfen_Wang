@@ -21,13 +21,17 @@ detailed instructions on what to do for each part of the process.
 
 NOTE: 
 If you're running on a Windows machine, you will need to install mingw (to get access to the gcc compiler).
-	- Follow the minGW install instructions in the following link (ignore the cmake instructions): 
-          https://wiki.dephy.com/wiki/flexsea/doku.php?id=installbuildtoolswindows&s[]=mingw 
+Follow the minGW install instructions in the following link (ignore the cmake instructions): 
+
+https://wiki.dephy.com/wiki/flexsea/doku.php?id=installbuildtoolswindows&s[]=mingw 
+
 If you're running on a Linux/Ubuntu 22.04 machine, you will need to install gcc by running the following 
 in your command terminal:
-	sudo apt-get install -y git gcc build-essential
+
+sudo apt-get install -y git gcc build-essential
 	
 If you're running on a MacOS, you will need to install gcc by running the following in your command terminal:
-	brew install gcc
+
+brew install gcc
 
 Good Luck!
