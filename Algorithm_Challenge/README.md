@@ -4,8 +4,7 @@ Welcome to the Algorithm Challenges!
 
 If you're reading this then we want to know more about how you find brand new solutions to problems.
 
-There are two challenges for you to solve. The TrafficControl challenge and the Elevator challenge. 
-It does not matter which order you solve them in, but do use your time wisely so you can get to both.
+There are two possible challenges for you to solve. The TrafficControl challenge and the Elevator challenge. 
 Look at the readme files in the applicable folder for more detailed instructions on what to do for 
 each challenge.
 
