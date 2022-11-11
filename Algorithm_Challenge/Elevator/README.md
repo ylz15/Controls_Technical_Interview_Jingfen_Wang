@@ -26,10 +26,10 @@ A few things to note about the simulation:
   arrivals side of the simulation. Within the code, the number of people who've arrived on a floor is represented as 
   an integer variable within the floor_s structure. 
 
-To build the project, type the following in your command terminal:
+To build the project, type the following in your bash terminal:
 gcc elevator_problem.c -o elevator_problem
 
-To run the project, type the following in your command terminal:
+To run the project, type the following in your bash terminal:
 ./elevator_problem.exe
 
 Candidate Action Items:

@@ -21,10 +21,10 @@ A few things to note about the simulation:
   lane to cross the intersection, they cannot both move into the intersection at the same time. The first car in the 
   lane will move into the intersection. Then, the second car will move into the intersection as the first car leaves. 
 
-To build the project, type the following in your command terminal:
+To build the project, type the following in your bash terminal:
 gcc traffic_light_problem.c -o traffic_light_problem
 
-To run the project, type the following in your command terminal:
+To run the project, type the following in your bash terminal:
 ./traffic_light_problem.exe
 
 Candidate Action Items:

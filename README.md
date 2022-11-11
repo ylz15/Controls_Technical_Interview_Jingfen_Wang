@@ -19,20 +19,23 @@ this info in an email from us), you may be working out of the Algorithm_Challeng
 Debugging_Challenge folder, or both. Look at the readme files in the applicable folder for more 
 detailed instructions on what to do for each part of the process.
 
-NOTE: 
-If you're running on a Windows machine, you will need to install mingw (to get access to the gcc compiler).
-Follow the minGW install instructions in the following link (ignore the cmake instructions): 
+NOTE ABOUT TOOLS YOU WILL NEED:
+You will need to install git (for access to the git bash terminal and so you can clone the repo) as 
+well as a GCC compiler.
+
+Git install instructions for all machines - https://git-scm.com/downloads
+
+GCC install instructions for Windows - just install mingw using this link (ignore the cmake instructions): 
 
 https://wiki.dephy.com/wiki/flexsea/doku.php?id=installbuildtoolswindows&s[]=mingw 
 
-If you're running on a Linux/Ubuntu 22.04 machine, you will need to install gcc by running the following 
-in your command terminal:
+GCC install instructions for Linux/Ubuntu 22.04 - run the following in your command terminal:
 
 ```bash
 sudo apt-get install -y git gcc build-essential
 ```
 	
-If you're running on a MacOS, you will need to install gcc by running the following in your command terminal:
+GCC install instructions for MacOS - run the following in your command terminal:
 
 ```
 brew install gcc
