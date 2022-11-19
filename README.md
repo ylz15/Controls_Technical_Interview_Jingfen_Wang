@@ -24,10 +24,12 @@ You will need to install git (for access to the git bash terminal and so you can
 well as a GCC compiler.
 
 Git install instructions for all machines - https://git-scm.com/downloads
+Note: When setting up git, don't forget to set up an ssh key so you can properly access the repo from 
+your machine. Follow the instructions under section 3.1 SSH Keys of the 'ST-git Installation and 
+Setup-121122-150836' file if you need help with this.
 
-GCC install instructions for Windows - just install mingw using this link (ignore the cmake instructions): 
-
-https://wiki.dephy.com/wiki/flexsea/doku.php?id=installbuildtoolswindows&s[]=mingw 
+GCC install instructions for Windows - follow the instructions in the MinGW_Install_For_Windows google 
+drive folder that was shared with you.
 
 GCC install instructions for Linux/Ubuntu 22.04 - run the following in your command terminal:
 
