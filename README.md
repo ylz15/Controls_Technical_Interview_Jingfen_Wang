@@ -5,11 +5,9 @@ Welcome to Dephy's Controls Technical Interview repo!
 If you're reading this then you've made it to the point in the interview process where we want
 to know more about you're practical programming and problem solving skills.
 
-In order to submit a solution, clone this repo and create a branch as follows:
-```bash
-git clone git@github.com:DephyInc/Controls_Technical_Interview.git
-git checkout -b solution/FIRSTNAME_LASTNAME  # e.g. solution/luke_mooney
-```
+In order to work on your solution, fork this repo but append your name to the repo name 
+(i.e. the forked repo name should be Controls_Technical_Interview_FIRSTNAME_LASTNAME).
+
 Once you are ready to submit your solution, create a pull request to _master_.
 (Note: You will not have infinite time to submit your solution, but you should have your deadline
 info in an email from us)
