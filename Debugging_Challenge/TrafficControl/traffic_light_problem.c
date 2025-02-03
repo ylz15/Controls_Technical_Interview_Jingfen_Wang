@@ -51,7 +51,7 @@ void main(void)
 
 	//Initialize the intersection
 	initIntersection();
-
+		
 	//Run traffic through the intersection for a set period of time
 	for(int8_t i = 0; i < 120; i++)
 	{
@@ -86,6 +86,7 @@ void main(void)
 			return;
 		}
 	}
+	// printf("%d\n", myIntersection.westboundCars.timeWaiting);
 
 	//If the animation time's out, let them know their score.
 	int8_t totalCarsThatMadeIt = myIntersection.northboundCars.carsThatHaveLeft + myIntersection.southboundCars.carsThatHaveLeft + myIntersection.westboundCars.carsThatHaveLeft + myIntersection.eastboundCars.carsThatHaveLeft;
@@ -115,6 +116,7 @@ static char * setHorizantalTrafficLight(struct intersection_s intersection)
 	char * newColor = currentColor;
 	traffic_light_colors_t currentColorEnum = -1;
 
+
 	if(strcmp(currentColor,"R") == 0)
 	{
 		currentColorEnum = RED;
@@ -122,11 +124,11 @@ static char * setHorizantalTrafficLight(struct intersection_s intersection)
 	else if(strcmp(currentColor,"G") == 0)
 	{
 		currentColorEnum = GREEN;
-
-		if(strcmp(currentColor,"Y") == 0)
-		{
-			currentColorEnum = YELLOW;
-		}
+	}
+	//Fixed misplaced if-else structure
+	else if(strcmp(currentColor,"Y") == 0)
+	{
+		currentColorEnum = YELLOW;
 	}
 
 	t++;
@@ -138,6 +140,7 @@ static char * setHorizantalTrafficLight(struct intersection_s intersection)
 				newColor = "G";
 				t = 0;
 			}
+			break; //Added missing statement
 
 		case GREEN:
 			if((intersection.eastboundCars.carsWaitingAtIntersection + intersection.westboundCars.carsWaitingAtIntersection < intersection.northboundCars.carsWaitingAtIntersection + intersection.southboundCars.carsWaitingAtIntersection) || t > 10)
@@ -145,6 +148,7 @@ static char * setHorizantalTrafficLight(struct intersection_s intersection)
 				newColor = "Y";
 				t = 0;
 			}
+			break;//Added missing statement
 
 		case YELLOW:
 			if(t > 1)
@@ -152,10 +156,13 @@ static char * setHorizantalTrafficLight(struct intersection_s intersection)
 				newColor = "R";
 				t = 0;
 			}
+			break;//Added missing statement
 
+		
 		default:
 			newColor = "R";
 			t = 0;	
+			break;//Added missing statement
 	}
 
 	return newColor;
@@ -171,11 +178,11 @@ static char * setVerticalTrafficLight(struct intersection_s intersection)
 	if(strcmp(currentColor,"R") == 0)
 	{
 		currentColorEnum = RED;
-
-		if(strcmp(currentColor,"G") == 0)
-		{	
-			currentColorEnum = GREEN;
-		}
+	}
+	//Fixed misplaced if-else structure
+	else if(strcmp(currentColor,"G") == 0)
+	{
+		currentColorEnum = GREEN;
 	}
 	else if(strcmp(currentColor,"Y") == 0)
 	{
@@ -222,6 +229,7 @@ static void advanceLane(char * trafficColor, struct lane_of_cars_s * lane)
 {
 	//Move any cars on the leaving side of the intersection into oblivion
 	//but mark them in the total lane count
+	int16_t waitAtTime, waitInTime;
 	if(lane->carsLeavingIntersection > 0)
 	{
 		lane->carsLeavingIntersection--;
@@ -251,9 +259,18 @@ static void advanceLane(char * trafficColor, struct lane_of_cars_s * lane)
 			lane->carsWaitingAtIntersection++;	
 		}
 	}
-
 	//Keep track of how long cars have cumulatively waited at this part of the intersection
-	lane->timeWaiting += lane->carsWaitingAtIntersection;
+	if(lane->carsWaitingAtIntersection >= 0){
+		waitAtTime = lane->carsWaitingAtIntersection;
+	}else{
+		waitAtTime = 0;
+	}
+	if(lane->carsInIntersection >= 0){
+		waitInTime = lane->carsInIntersection;
+	}else{
+		waitInTime = 0;
+	}
+	lane->timeWaiting += waitAtTime + waitInTime;
 }
 
 static void drawIntersection(struct intersection_s intersection)
@@ -425,7 +442,8 @@ static void delay(int16_t ms)
 static int8_t checkForCrashes(void)
 {
 	int8_t isHorizantalCarInIntersection = (myIntersection.westboundCars.carsInIntersection | myIntersection.eastboundCars.carsInIntersection);
-	int8_t isVerticalCarInIntersection = (myIntersection.westboundCars.carsInIntersection | myIntersection.eastboundCars.carsInIntersection);
+	//Fixed repeated variable names
+	int8_t isVerticalCarInIntersection = (myIntersection.northboundCars.carsInIntersection | myIntersection.southboundCars.carsInIntersection);
 
 	if(isHorizantalCarInIntersection && isVerticalCarInIntersection){return 1;}
 	return 0;
