@@ -46,7 +46,50 @@ static void delay(int16_t ms);
 //Note: The output should be a number between 0 and (BUILDING_HEIGHT-1), inclusive
 static int8_t setNextElevatorStop(struct building_s building)
 {
-	return 0;
+	int8_t currentFloor = building.elevator.currentFloor;
+    int8_t nextStop = -1;
+    int8_t bestScore = -100;  // Score-based optimization for efficiency
+    int8_t direction = 0;     // 1 = Up, -1 = Down
+
+    // Step 1: Handle Drop-Offs & Pick-Ups Simultaneously
+    for (int8_t f = 0; f < BUILDING_HEIGHT; f++) {
+        int8_t score = 0;
+        
+        // Drop-Offs: Count passengers in elevator that need to exit at this floor
+        for (int8_t i = 0; i < ELEVATOR_MAX_CAPACITY; i++) {
+            if (building.elevator.passengers[i] == f) {
+                score += 5;  // High priority to drop-off locations
+            }
+        }
+        
+        // Pick-Ups: Count number of people waiting at the floor
+        int8_t numWaiting = 0;
+        for (int8_t j = 0; j < 2; j++) {
+            if (building.floors[f].departures[j] != -1) {
+                numWaiting++;
+            }
+        }
+
+        score += numWaiting * 3;  // Prioritize floors with more passengers
+
+        // Minimize travel time by subtracting distance
+        int8_t distance = abs(f - currentFloor);
+        score -= distance;
+
+        // Update best floor to stop
+        if (score > bestScore) {
+            bestScore = score;
+            nextStop = f;
+            direction = (f > currentFloor) ? 1 : -1;
+        }
+    }
+
+    // If no pickups or drop-offs are pending, default to middle waiting position
+    if (nextStop == -1) {
+        nextStop = (BUILDING_HEIGHT / 2);
+    }
+
+    return nextStop;
 }
 
 
