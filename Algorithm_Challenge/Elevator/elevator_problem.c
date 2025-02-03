@@ -48,43 +48,36 @@ static int8_t setNextElevatorStop(struct building_s building)
 {
 	int8_t currentFloor = building.elevator.currentFloor;
     int8_t nextStop = -1;
-    int8_t bestScore = -100;  // Score-based optimization for efficiency
-    int8_t direction = 0;     // 1 = Up, -1 = Down
-
-    // Step 1: Handle Drop-Offs & Pick-Ups Simultaneously
-    for (int8_t f = 0; f < BUILDING_HEIGHT; f++) {
-        int8_t score = 0;
-        
-        // Drop-Offs: Count passengers in elevator that need to exit at this floor
-        for (int8_t i = 0; i < ELEVATOR_MAX_CAPACITY; i++) {
-            if (building.elevator.passengers[i] == f) {
-                score += 5;  // High priority to drop-off locations
+    int8_t closestDistance = BUILDING_HEIGHT; // Maximum possible distance
+    
+    //Step 1: Check if any passengers need to get off at the next closest floor
+    for (int8_t i = 0; i < ELEVATOR_MAX_CAPACITY; i++) {
+        if (building.elevator.passengers[i] != -1) { 
+            int8_t destinationFloor = building.elevator.passengers[i];
+            int8_t distance = abs(destinationFloor - currentFloor);
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                nextStop = destinationFloor;
             }
-        }
-        
-        // Pick-Ups: Count number of people waiting at the floor
-        int8_t numWaiting = 0;
-        for (int8_t j = 0; j < 2; j++) {
-            if (building.floors[f].departures[j] != -1) {
-                numWaiting++;
-            }
-        }
-
-        score += numWaiting * 3;  // Prioritize floors with more passengers
-
-        // Minimize travel time by subtracting distance
-        int8_t distance = abs(f - currentFloor);
-        score -= distance;
-
-        // Update best floor to stop
-        if (score > bestScore) {
-            bestScore = score;
-            nextStop = f;
-            direction = (f > currentFloor) ? 1 : -1;
         }
     }
 
-    // If no pickups or drop-offs are pending, default to middle waiting position
+    //Step 2: If no passengers need to exit, find the nearest pickup request
+    if (nextStop == -1) {
+        for (int8_t f = 0; f < BUILDING_HEIGHT; f++) {
+            for (int8_t j = 0; j < 2; j++) {
+                if (building.floors[f].departures[j] != -1) { 
+                    int8_t distance = abs(f - currentFloor);
+                    if (distance < closestDistance) {
+                        closestDistance = distance;
+                        nextStop = f;
+                    }
+                }
+            }
+        }
+    }
+
+    //Step 3: If no new requests, keep elevator idle at middle floor
     if (nextStop == -1) {
         nextStop = (BUILDING_HEIGHT / 2);
     }
