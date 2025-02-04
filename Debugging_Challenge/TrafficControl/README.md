@@ -43,7 +43,7 @@ Candidate Action Items:
     - Debugging systematically—by isolating variables and printing intermediate values—can help catch logical errors early.
     - Avoid copy-pasting logic without checking variable names.
   - How else would you change this code to make it better so you can build on it in the future?(1-10 sentences).
-    - ADD YOUR ANSWER HERE
+    - Instead of using a global variable (myIntersection), I would create functions that initialize, update, and manage intersection_s to improve modularity. I would also make the parameters like 'simulation_time' and 'lane_popularity' easier to configure, so I can experiment with different parameters easier. I would implement file I/O to store and reload the intersection state, allowing for debugging and repeatability. Writing unit tests to validate functions like 'advanceLane()' and 'checkForCrashes()', so it will be easier to pin point where the bug is located in the system.
 
 Don't forget; we are interested in both your solution and your thought process.
 
