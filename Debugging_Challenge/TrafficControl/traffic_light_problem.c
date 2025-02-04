@@ -229,7 +229,7 @@ static void advanceLane(char * trafficColor, struct lane_of_cars_s * lane)
 {
 	//Move any cars on the leaving side of the intersection into oblivion
 	//but mark them in the total lane count
-	int16_t waitAtTime, waitInTime;
+	int16_t waitAtTime;
 	if(lane->carsLeavingIntersection > 0)
 	{
 		lane->carsLeavingIntersection--;
@@ -260,17 +260,12 @@ static void advanceLane(char * trafficColor, struct lane_of_cars_s * lane)
 		}
 	}
 	//Keep track of how long cars have cumulatively waited at this part of the intersection
-	if(lane->carsWaitingAtIntersection >= 0){
-		waitAtTime = lane->carsWaitingAtIntersection;
-	}else{
-		waitAtTime = 0;
-	}
-	if(lane->carsInIntersection >= 0){
-		waitInTime = lane->carsInIntersection;
-	}else{
-		waitInTime = 0;
-	}
-	lane->timeWaiting += waitAtTime + waitInTime;
+	// if(lane->carsWaitingAtIntersection >= 0){
+	// 	waitAtTime = lane->carsWaitingAtIntersection;
+	// }else{
+	// 	waitAtTime = 0;
+	// }
+	lane->timeWaiting += lane->carsWaitingAtIntersection;
 }
 
 static void drawIntersection(struct intersection_s intersection)
