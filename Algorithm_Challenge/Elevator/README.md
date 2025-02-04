@@ -39,7 +39,7 @@ Candidate Action Items:
   above function, please do not edit the code that's already in the files, unless you are extremely certain that 
   there's a bug in the code.
 - Briefly describe your implementation (1-3 sentences).
-  - ADD YOUR ANSWER HERE
+  - This function determines the next floor where the elevator should stop by first checking if any current passengers need to exit at the closest floor. If no passengers need to get off, it then searches for the nearest floor with a pickup request. The function ensures the elevator prioritizes minimizing travel distance for efficiency.
 
 Don't forget; we are interested in both your solution and your thought process.
 
