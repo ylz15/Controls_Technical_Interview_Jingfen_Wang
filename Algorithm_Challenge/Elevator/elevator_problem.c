@@ -48,12 +48,14 @@ static int8_t setNextElevatorStop(struct building_s building)
 {
 	int8_t currentFloor = building.elevator.currentFloor;
     int8_t nextStop = -1;
-    int8_t closestDistance = BUILDING_HEIGHT; // Maximum possible distance
+    int8_t closestDistance = BUILDING_HEIGHT; //Maximum possible distance
     
-    //Step 1: Check if any passengers need to get off at the next closest floor
+    //1: Check for passengers who need to get off at the next closest floor
     for (int8_t i = 0; i < ELEVATOR_MAX_CAPACITY; i++) {
-        if (building.elevator.passengers[i] != -1) { 
-            int8_t destinationFloor = building.elevator.passengers[i];
+		int8_t destinationFloor = building.elevator.passengers[i];
+
+        if (destinationFloor != -1) {//There is passenger in the elevator
+
             int8_t distance = abs(destinationFloor - currentFloor);
             if (distance < closestDistance) {
                 closestDistance = distance;
@@ -62,24 +64,25 @@ static int8_t setNextElevatorStop(struct building_s building)
         }
     }
 
-    //Step 2: If no passengers need to exit, find the nearest pickup request
+    //2: If no passengers need to exit, find the closest pickup request
     if (nextStop == -1) {
-        for (int8_t f = 0; f < BUILDING_HEIGHT; f++) {
-            for (int8_t j = 0; j < 2; j++) {
-                if (building.floors[f].departures[j] != -1) { 
-                    int8_t distance = abs(f - currentFloor);
-                    if (distance < closestDistance) {
-                        closestDistance = distance;
-                        nextStop = f;
-                    }
-                }
-            }
-        }
-    }
 
-    //Step 3: If no new requests, keep elevator idle at middle floor
-    if (nextStop == -1) {
-        nextStop = (BUILDING_HEIGHT / 2);
+        for (int8_t floor = 0; floor < BUILDING_HEIGHT; floor++) {	
+			
+			//Loop through departure request slots
+            for (int8_t side = 0; side < 2; side++) {	
+				int8_t requestFloor = building.floors[floor].departures[side];
+				
+				if(requestFloor != -1){
+					int8_t distance = abs(floor-currentFloor);
+
+					if(distance < closestDistance){
+						closestDistance = distance;
+						nextStop = floor;
+					}
+				}
+			}
+        }
     }
 
     return nextStop;
