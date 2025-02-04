@@ -8,6 +8,14 @@
 	move cars through an intersection while minimizing wait time at red lights. 
 ****************************************************************************
 	[Created] 2022-11-04 | rharris | Initial creation
+****************************************************************************
+	[Modifications] 2025-02-03 | Jing-Fen Wang
+	- Fixed misplaced and missed structures in 
+	  `setHorizantalTrafficLight` & `setVerticalTrafficLight`
+	- Fixed wrong variable name in `checkForCrashes()`
+	- Modified data type for variable `timeWaiting` in header file
+	- Replaced individual `advanceLane()` calls with a loop to improve scalability.
+	- Added `calculateTotalTime()`
 ****************************************************************************/
 
 //****************************************************************************
@@ -38,7 +46,7 @@ static void drawWestboundLane(char * trafficColor, struct lane_of_cars_s westbou
 static void drawEastboundLane(char * trafficColor, struct lane_of_cars_s eastboundCars);
 static void delay(int16_t ms);
 static int8_t checkForCrashes(void);
-
+static int16_t calculateTotalTime(void);
 //****************************************************************************
 // Public function(s):
 //****************************************************************************
@@ -51,6 +59,15 @@ void main(void)
 
 	//Initialize the intersection
 	initIntersection();
+
+	//Array to store all four lanes for iteration
+	struct lane_of_cars_s *lanes[4] = 
+	{
+    	&myIntersection.westboundCars,
+    	&myIntersection.eastboundCars,
+    	&myIntersection.northboundCars,
+    	&myIntersection.southboundCars
+	};
 		
 	//Run traffic through the intersection for a set period of time
 	for(int8_t i = 0; i < 120; i++)
@@ -59,11 +76,11 @@ void main(void)
 		myIntersection.horizantalTrafficColor = setHorizantalTrafficLight(myIntersection);
 		myIntersection.verticalTrafficColor = setVerticalTrafficLight(myIntersection);
 
-		//Advance the lanes if possible
-		advanceLane(myIntersection.horizantalTrafficColor, &myIntersection.westboundCars);
-		advanceLane(myIntersection.horizantalTrafficColor, &myIntersection.eastboundCars);
-		advanceLane(myIntersection.verticalTrafficColor, &myIntersection.northboundCars);
-		advanceLane(myIntersection.verticalTrafficColor, &myIntersection.southboundCars);
+		//Loop through each lane and advance the lane if possible
+		for (int j = 0; j < 4; j++) 
+		{
+        	advanceLane((j < 2) ? myIntersection.horizantalTrafficColor : myIntersection.verticalTrafficColor, lanes[j]);
+    	}
 
 		//Draw the intersection
 		system("clear");
@@ -81,16 +98,15 @@ void main(void)
 		//Check if all the cars have left the lanes
 		if(myIntersection.northboundCars.carsThatHaveLeft == 10 && myIntersection.southboundCars.carsThatHaveLeft == 10 && myIntersection.westboundCars.carsThatHaveLeft == 10 && myIntersection.eastboundCars.carsThatHaveLeft == 10)
 		{
-			int16_t totalWaitTime = myIntersection.northboundCars.timeWaiting + myIntersection.southboundCars.timeWaiting + myIntersection.westboundCars.timeWaiting + myIntersection.eastboundCars.timeWaiting;
+			int16_t totalWaitTime = calculateTotalTime();
 			printf("SUCCESS: You got all the cars through! The total wait time was: %i seconds!\n", totalWaitTime);
 			return;
 		}
 	}
-	// printf("%d\n", myIntersection.westboundCars.timeWaiting);
-
+	
 	//If the animation time's out, let them know their score.
 	int8_t totalCarsThatMadeIt = myIntersection.northboundCars.carsThatHaveLeft + myIntersection.southboundCars.carsThatHaveLeft + myIntersection.westboundCars.carsThatHaveLeft + myIntersection.eastboundCars.carsThatHaveLeft;
-	int16_t totalWaitTime = myIntersection.northboundCars.timeWaiting + myIntersection.southboundCars.timeWaiting + myIntersection.westboundCars.timeWaiting + myIntersection.eastboundCars.timeWaiting;
+	int16_t totalWaitTime = calculateTotalTime();
 	printf("FAIL: Traffic Jam! You ran out of time. You got %i/40 cars through in 120 seconds. The total wait time was: %i seconds.\n", totalCarsThatMadeIt, totalWaitTime);
 }
 
@@ -229,7 +245,6 @@ static void advanceLane(char * trafficColor, struct lane_of_cars_s * lane)
 {
 	//Move any cars on the leaving side of the intersection into oblivion
 	//but mark them in the total lane count
-	int16_t waitAtTime;
 	if(lane->carsLeavingIntersection > 0)
 	{
 		lane->carsLeavingIntersection--;
@@ -260,11 +275,6 @@ static void advanceLane(char * trafficColor, struct lane_of_cars_s * lane)
 		}
 	}
 	//Keep track of how long cars have cumulatively waited at this part of the intersection
-	// if(lane->carsWaitingAtIntersection >= 0){
-	// 	waitAtTime = lane->carsWaitingAtIntersection;
-	// }else{
-	// 	waitAtTime = 0;
-	// }
 	lane->timeWaiting += lane->carsWaitingAtIntersection;
 }
 
@@ -442,4 +452,10 @@ static int8_t checkForCrashes(void)
 
 	if(isHorizantalCarInIntersection && isVerticalCarInIntersection){return 1;}
 	return 0;
+}
+
+static int16_t calculateTotalTime(void)
+{
+	return myIntersection.northboundCars.timeWaiting + myIntersection.southboundCars.timeWaiting 
+	+ myIntersection.westboundCars.timeWaiting + myIntersection.eastboundCars.timeWaiting;
 }

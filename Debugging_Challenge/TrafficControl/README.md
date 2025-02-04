@@ -39,7 +39,9 @@ Candidate Action Items:
 - Make any other improvements to the code as you see fit
 - Answer the following questions:
   - What would you tell the junior engineer about ways that they could improve their code in the future? (1-3 sentences)
-    - ADD YOUR ANSWER HERE
+    - Use appropriate data types for cumulative metrics to prevent overflow or underflow issues.
+    - Debugging systematically—by isolating variables and printing intermediate values—can help catch logical errors early.
+    - Avoid copy-pasting logic without checking variable names.
   - How else would you change this code to make it better so you can build on it in the future?(1-10 sentences).
     - ADD YOUR ANSWER HERE
 
